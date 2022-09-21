@@ -1,7 +1,24 @@
+import { useRecoilState, useEffect } from '../libraries';
+import { newsState, newsSelector } from '../atoms';
+
 import Head from 'next/head';
 import AppLayout from '../components/templates/AppLayout';
 
-export default function Home() {
+export default function Home({ newsResults, randomUsersResults }) {
+  // console.log(newsResults.articles);
+  // console.log(randomUsersResults.results);
+  const [news, setNewsState] = useRecoilState(newsState); // 전역상태를 state로 만듦
+  // const [users, setUsersState] = useRecoilState(randomUsersResults.results); // 전역상태를 state로 만듦
+
+  // console.log('index1', news);
+  // console.log('index2', users);
+
+  useEffect(() => {
+    if (newsResults.articles) {
+      setNewsState(newsResults.articles);
+    }
+  }, []);
+
   return (
     <div>
       <Head>
@@ -36,4 +53,29 @@ export default function Home() {
       </AppLayout>
     </div>
   );
+}
+// https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
+export async function getStaticProps() {
+  const newsResults = await fetch('https://saurav.tech/NewsAPI/everything/cnn.json').then((res) =>
+    res.json(),
+  );
+
+  let randomUsersResults = [];
+
+  try {
+    const res = await fetch('https://randomuser.me/api/?results=30&inc=name,login,picture');
+
+    randomUsersResults = await res.json();
+  } catch (e) {
+    randomUsersResults = [];
+  }
+
+  // console.log('getServerSideProps', newsResults);
+
+  return {
+    props: {
+      newsResults,
+      randomUsersResults,
+    },
+  };
 }

@@ -1,7 +1,12 @@
-import { React, PropTypes, Fragment, useRouter } from '../../libraries';
+import { React, PropTypes, Fragment, useEffect, useRecoilValue } from '../../libraries';
+import { newsState, newsSelector } from '../../atoms';
 
 export default function SiteRightSidebar({ ...props }) {
-  // console.log(props);
+  // const news = useRecoilValue(newsState);
+
+  useEffect(() => {
+    // console.log(news);
+  }, []);
 
   return (
     <Fragment>

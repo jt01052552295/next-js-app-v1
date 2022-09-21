@@ -36,7 +36,8 @@ export default function AppLayout({ ...props }) {
     showHeader,
     showFooter,
   } = props;
-  // console.log(props.children);
+  // console.log(props.news);
+  // console.log(props.users);
   return (
     <Fragment>
       {showHeader ? <SiteHeader /> : ''}
