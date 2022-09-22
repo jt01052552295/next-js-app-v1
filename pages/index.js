@@ -1,21 +1,25 @@
-import { useEffect } from '../libraries';
-import { newsState, newsSelector, fontSizeState, fontSizeLabelState } from '../atoms';
+import { useEffect, useRecoilState, useRecoilValue } from '../libraries';
+import { newsState, usersState } from '../atoms';
 
 import Head from 'next/head';
 import AppLayout from '../components/templates/AppLayout';
 
 export default function Home({ newsResults, randomUsersResults }) {
-  // console.log(newsResults.articles);
-  // console.log(randomUsersResults.results);
-
   // 전역상태를 state로 만듦
-  // const [news, setNewsState] = useRecoilState(newsState);
-  // const [users, setUsersState] = useRecoilState(randomUsersResults.results);
+  const [news, setNewsState] = useRecoilState(newsState);
+  const [users, setUsersState] = useRecoilState(usersState);
 
-  // console.log('index1', news);
-  // console.log('index2', users);
+  useEffect(() => {
+    if (users.length === 0 && randomUsersResults.results.length > 0) {
+      setUsersState(randomUsersResults.results);
+    }
+    if (news.length === 0 && newsResults.articles.length > 0) {
+      setNewsState(newsResults.articles);
+    }
 
-  useEffect(() => {}, []);
+    // console.log(newsResults.articles);
+    // console.log(randomUsersResults.results);
+  }, []);
 
   return (
     <div>
@@ -47,21 +51,27 @@ export default function Home({ newsResults, randomUsersResults }) {
 }
 // https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
 export async function getStaticProps() {
-  const newsResults = await fetch('https://saurav.tech/NewsAPI/everything/cnn.json').then((res) =>
-    res.json(),
-  );
+  let newsResults = [];
+
+  try {
+    const res = await fetch('https://saurav.tech/NewsAPI/everything/cnn.json');
+
+    newsResults = await res.json();
+  } catch (e) {
+    newsResults = [];
+  }
 
   let randomUsersResults = [];
 
   try {
-    const res = await fetch('https://randomuser.me/api/?results=30&inc=name,login,picture');
+    const res = await fetch(
+      'https://randomuser.me/api/?results=30&inc=name,login,picture,registered',
+    );
 
     randomUsersResults = await res.json();
   } catch (e) {
     randomUsersResults = [];
   }
-
-  // console.log('getServerSideProps', newsResults);
 
   return {
     props: {

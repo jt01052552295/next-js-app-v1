@@ -1,16 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+    typeof document !== undefined ? require('bootstrap/dist/js/bootstrap.bundle.min.js') : null;
   }, []);
 
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Component {...pageProps} />
+      </Suspense>
     </RecoilRoot>
   );
 }

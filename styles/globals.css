@@ -3,10 +3,21 @@ main {
 }
 
 .sidebar-wrapper {
-  background-color: aqua;
+  background-color: white;
   position: -webkit-sticky;
   position: sticky;
   top: 74px;
   z-index: 1120;
   max-height: 500px;
+}
+
+.text-truncate-container {
+  max-width: 100%;
+}
+.text-truncate-container p {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1em;
 }
