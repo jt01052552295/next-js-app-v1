@@ -1,10 +1,18 @@
 import AppLayout from '../../components/templates/AppLayout';
 
-import { useState, useEffect, useRouter, FontAwesomeIcon, Link, Image } from '../../libraries';
+import {
+  useState,
+  useEffect,
+  useRouter,
+  FontAwesomeIcon,
+  Link,
+  Image,
+  axios,
+} from '../../libraries';
 import { faSearch, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function SignIn() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkMeOut, setCheckMeOut] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
@@ -35,9 +43,14 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const credentials = { username, password, checkMeOut };
+      const credentials = { email, password };
 
-      console.log(credentials);
+      axios
+        .post('/api/auth', credentials)
+        .then((res) => {
+          console.log(res.data.body);
+        })
+        .catch((error) => console.error(error.message));
 
       //   userService
       //     .login(username, password)
@@ -89,7 +102,7 @@ export default function SignIn() {
                 name="username"
                 id="inputEmail3"
                 aria-describedby="emailHelp"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <div id="emailHelp" className="form-text">
                 We{`'`}ll never share your email with anyone else.
