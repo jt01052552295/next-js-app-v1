@@ -16,10 +16,10 @@ export default function SiteHeader({ ...props }) {
         <SiteNavigation />
 
         <div className="col-md-3 text-end">
-          <Link href="/">
+          <Link href="/member/sign-in">
             <a className="btn btn-outline-primary me-2">Login</a>
           </Link>
-          <Link href="/">
+          <Link href="/member/sign-up">
             <a className="btn btn-primary">Sign-up</a>
           </Link>
         </div>
