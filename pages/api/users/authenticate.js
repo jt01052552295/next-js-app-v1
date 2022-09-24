@@ -26,12 +26,12 @@ export default function handler(req, res) {
         },
       );
 
-      //console.log(result.data.email);
       if (result.data.email === email) {
         const token = jwt.sign({ sub: result.data.email }, serverRuntimeConfig.secret, {
           expiresIn: '7d',
         });
         return res.status(200).json({
+          success: true,
           id: result.data.id,
           email: result.data.email,
           username: result.data.name,

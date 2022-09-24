@@ -11,20 +11,23 @@ const userSubject = new BehaviorSubject(
 );
 
 export const signInService = {
-  // user: userSubject.asObservable(),
-  // get userValue() {
-  //   return userSubject.value;
-  // },
+  user: userSubject.asObservable(),
+  get userValue() {
+    return userSubject.value;
+  },
   login,
-  // logout,
-  // getAll,
+  logout,
 };
 function login(email, password) {
   const credentials = { email, password };
   return fetchWrapper.post(`${baseUrl}/authenticate`, credentials).then((res) => {
     console.log('sigin.in.service');
-    const user = res.data;
-    localStorage.setItem('user', JSON.stringify(user));
+    const user = res;
+    console.log(user.success);
+    if (user.success) {
+      userSubject.next(user);
+      localStorage.setItem('user', JSON.stringify(user));
+    }
 
     return user;
   });

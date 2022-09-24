@@ -12,11 +12,11 @@ function post(url, body) {
   const requestOptions = {
     headers: { 'Content-Type': 'application/json', ...authHeader(url) },
   };
-  console.log('post', requestOptions);
-  console.log('post', url, body);
+  //   console.log('post', requestOptions);
+  //   console.log('post', url, body);
 
   return axios.post(url, body, requestOptions).then((res) => {
-    return res;
+    return res.data;
   });
 }
 

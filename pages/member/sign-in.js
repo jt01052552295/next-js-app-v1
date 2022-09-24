@@ -19,6 +19,10 @@ export default function SignIn() {
   const [passwordButtonIcon, setPasswordButtonIcon] = useState(faEyeSlash);
   const router = useRouter();
 
+  useEffect(() => {
+    console.log('signIn - signInService.userValue', signInService.userValue);
+  }, []);
+
   const mainDivStyle = {
     padding: '1em',
   };
@@ -56,6 +60,12 @@ export default function SignIn() {
         .login(email, password)
         .then((res) => {
           console.log('res', res);
+          if (res.success) {
+            const returnUrl = router.query.returnUrl || '/';
+            router.push(returnUrl);
+          } else {
+            throw res.message;
+          }
         })
         .catch((error) => {
           // setError("apiError", { message: error });
