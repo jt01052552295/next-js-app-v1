@@ -41,6 +41,6 @@ export default async function handler(req, res) {
       body: result.data,
     });
   } catch (e) {
-    res.status(500).json({ success: false });
+    res.json({ success: false, message: 'Invalid credentials!' });
   }
 }

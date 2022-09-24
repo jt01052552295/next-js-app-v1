@@ -1,5 +1,4 @@
 import AppLayout from '../../components/templates/AppLayout';
-
 import {
   useState,
   useEffect,
@@ -10,6 +9,7 @@ import {
   axios,
 } from '../../libraries';
 import { faSearch, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { signInService } from '../../services';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -45,24 +45,22 @@ export default function SignIn() {
     try {
       const credentials = { email, password };
 
-      axios
-        .post('/api/auth', credentials)
-        .then((res) => {
-          console.log(res.data.body);
-        })
-        .catch((error) => console.error(error.message));
+      // axios
+      //   .post('/api/auth', credentials)
+      //   .then((res) => {
+      //     console.log(res.data.body);
+      //   })
+      //   .catch((error) => console.error(error.message));
 
-      //   userService
-      //     .login(username, password)
-      //     .then((res) => {
-      //       // get return url from query parameters or default to '/'
-      //       const returnUrl = router.query.returnUrl || "/";
-      //       router.push(returnUrl);
-      //     })
-      //     .catch((error) => {
-      //       // setError("apiError", { message: error });
-      //       console.error("userService", error);
-      //     });
+      signInService
+        .login(email, password)
+        .then((res) => {
+          console.log('res', res);
+        })
+        .catch((error) => {
+          // setError("apiError", { message: error });
+          console.error('signInService', error);
+        });
 
       // const user = await axios.post("/api/auth/login", credentials);
 
