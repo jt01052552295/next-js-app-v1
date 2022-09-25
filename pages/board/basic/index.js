@@ -14,7 +14,7 @@ import { fetchWrapper } from '../../../helpers';
 import Pagination from 'react-js-pagination';
 
 export default function BoardBasicLists({ page, list, fallback }) {
-  console.log(list);
+  // console.log(list);
   const router = useRouter();
   const data = list;
 
@@ -75,7 +75,7 @@ export default function BoardBasicLists({ page, list, fallback }) {
 
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
-  const url = `${process.env.PUBLIC_NEXT_API_URL}/employee/list/${page}`;
+  const url = `${process.env.PUBLIC_NEXT_API_URL}/posts/list/${page}`;
   const data = await fetchWrapper.get(url);
   //   const data = null;
 
