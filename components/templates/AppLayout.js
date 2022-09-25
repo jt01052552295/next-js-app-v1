@@ -42,7 +42,7 @@ export default function AppLayout({ ...props }) {
     <Fragment>
       {showHeader ? <SiteHeader /> : ''}
       {
-        <main className="py-3">
+        <main className={`py-3`}>
           <div className="container">
             <div className="row">
               {showLeftSidebar && <SiteLeftSidebar />}
