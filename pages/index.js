@@ -10,10 +10,10 @@ export default function Home({ newsResults, randomUsersResults }) {
   const [users, setUsersState] = useRecoilState(usersState);
 
   useEffect(() => {
-    if (users.length === 0 && randomUsersResults.results.length > 0) {
+    if (users.length === 0 && randomUsersResults.results?.length > 0) {
       setUsersState(randomUsersResults.results);
     }
-    if (news.length === 0 && newsResults.articles.length > 0) {
+    if (news.length === 0 && newsResults.articles?.length > 0) {
       setNewsState(newsResults.articles);
     }
 
@@ -53,25 +53,25 @@ export default function Home({ newsResults, randomUsersResults }) {
 export async function getStaticProps() {
   let newsResults = [];
 
-  try {
-    const res = await fetch('https://saurav.tech/NewsAPI/everything/cnn.json');
+  // try {
+  //   const res = await fetch('https://saurav.tech/NewsAPI/everything/cnn.json');
 
-    newsResults = await res.json();
-  } catch (e) {
-    newsResults = [];
-  }
+  //   newsResults = await res.json();
+  // } catch (e) {
+  //   newsResults = [];
+  // }
 
   let randomUsersResults = [];
 
-  try {
-    const res = await fetch(
-      'https://randomuser.me/api/?results=30&inc=name,login,picture,registered',
-    );
+  // try {
+  //   const res = await fetch(
+  //     'https://randomuser.me/api/?results=30&inc=name,login,picture,registered',
+  //   );
 
-    randomUsersResults = await res.json();
-  } catch (e) {
-    randomUsersResults = [];
-  }
+  //   randomUsersResults = await res.json();
+  // } catch (e) {
+  //   randomUsersResults = [];
+  // }
 
   return {
     props: {

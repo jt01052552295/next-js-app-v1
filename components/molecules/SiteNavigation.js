@@ -16,14 +16,20 @@ export default function SiteNavigation({ ...props }) {
           Features
         </NavigationLink>
       </li>
+
       <li>
-        <NavigationLink href="/pricing" exact className="nav-link px-2 ">
-          Pricing
+        <NavigationLink href="/board/basic" exact className="nav-link px-2 ">
+          Basic
         </NavigationLink>
       </li>
       <li>
-        <NavigationLink href="/faqs" exact className="nav-link px-2 ">
-          FAQs
+        <NavigationLink href="/board/gallery" exact className="nav-link px-2 ">
+          Gallery
+        </NavigationLink>
+      </li>
+      <li>
+        <NavigationLink href="/pricing" exact className="nav-link px-2 ">
+          Pricing
         </NavigationLink>
       </li>
       <li>

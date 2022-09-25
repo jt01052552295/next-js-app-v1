@@ -5,8 +5,16 @@ const { publicRuntimeConfig } = getConfig();
 import { axios } from '../libraries';
 
 export const fetchWrapper = {
+  get,
   post,
 };
+
+function get(url) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json', ...authHeader(url) },
+  };
+  return axios.get(url, requestOptions).then((response) => response.data);
+}
 
 function post(url, body) {
   const requestOptions = {

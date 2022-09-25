@@ -29,10 +29,10 @@ export default function SiteHeader({ ...props }) {
     // run auth check on route change
     router.events.on('routeChangeComplete', authCheck);
 
-    console.log('header - authorized', authorized);
-    if (signInService.userValue) {
-      console.log('header - signInService.userValue', signInService.userValue);
-    }
+    // console.log('header - authorized', authorized);
+    // if (signInService.userValue) {
+    //   console.log('header - signInService.userValue', signInService.userValue);
+    // }
 
     return () => {
       router.events.off('routeChangeStart', hideContent);
@@ -46,14 +46,14 @@ export default function SiteHeader({ ...props }) {
     const publicPaths = ['/member/sign-in'];
     const path = url.split('?')[0];
     if (!signInService.userValue && !publicPaths.includes(path)) {
-      console.log('1111');
+      // console.log('1111');
       setAuthorized(false);
       // router.push({
       //   pathname: '/member/sign-in',
       //   query: { returnUrl: router.asPath },
       // });
     } else {
-      console.log('2222');
+      // console.log('2222');
       setAuthorized(true);
     }
   }
