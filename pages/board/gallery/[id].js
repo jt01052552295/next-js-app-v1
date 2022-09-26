@@ -37,7 +37,7 @@ export default function ViewPage({ id, article, fallback }) {
             <div class="card-footer text-end">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <Link href="/board/basic">
+                  <Link href="/board/gallery">
                     <a class="nav-link active">List</a>
                   </Link>
                 </li>

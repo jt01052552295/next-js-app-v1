@@ -7,11 +7,11 @@ const nextConfig = {
     defaultLocale: 'ko',
   },
   serverRuntimeConfig: {
-    secret: process.env.PUBLIC_NEXT_SECRET,
+    secret: process.env.NEXT_PUBLIC_SECRET,
   },
   publicRuntimeConfig: {
     apiUrl:
-      process.env.PUBLIC_NEXT_NODE_ENV === 'development'
+      process.env.NEXT_PUBLIC_NODE_ENV === 'development'
         ? 'http://localhost:3000/api' // development api
         : 'http://localhost:3000/api', // production api
   },

@@ -17,7 +17,7 @@ export default function handler(req, res) {
     try {
       const send_data = JSON.stringify({ email: email, password: password });
       const result = await axios.post(
-        `${process.env.PUBLIC_NEXT_API_URL}/employee/auth`,
+        `${process.env.NEXT_PUBLIC_API_URL}/employee/auth`,
         send_data,
         {
           headers: {

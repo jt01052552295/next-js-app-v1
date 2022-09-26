@@ -75,7 +75,7 @@ export default function BoardBasicLists({ page, list, fallback }) {
 
 export const getServerSideProps = async ({ query }) => {
   const page = query.page || 1;
-  const url = `${process.env.PUBLIC_NEXT_API_URL}/posts/list/${page}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/posts/list/${page}`;
   const data = await fetchWrapper.get(url);
   //   const data = null;
 
