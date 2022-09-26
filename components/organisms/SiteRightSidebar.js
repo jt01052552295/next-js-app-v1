@@ -11,7 +11,7 @@ import {
 import { newsState } from '../../atoms';
 import { AnimatePresence, motion } from 'framer-motion';
 import { DateTime } from 'luxon';
-import News from '../atoms/news';
+import News from '../atoms/News';
 
 export default function SiteRightSidebar({ ...props }) {
   const news = useRecoilValue(newsState);
