@@ -41,6 +41,7 @@ export default function handler(req, res) {
         res.json({ success: false, message: 'Failed credentials!' });
       }
     } catch (e) {
+      console.error(e);
       res.json({ success: false, message: 'Invalid credentials!' });
     }
   }

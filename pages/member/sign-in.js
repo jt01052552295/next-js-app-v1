@@ -69,14 +69,8 @@ export default function SignIn() {
         })
         .catch((error) => {
           // setError("apiError", { message: error });
-          console.error('signInService', error);
+          console.error('signInService - catch', error);
         });
-
-      // const user = await axios.post("/api/auth/login", credentials);
-
-      // setAuth(true);
-
-      // console.log(user);
     } catch (error) {
       console.log(error);
     }
