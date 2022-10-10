@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   i18n: {
     locales: ['ko'],
@@ -13,7 +13,7 @@ const nextConfig = {
     apiUrl:
       process.env.NEXT_PUBLIC_NODE_ENV === 'development'
         ? 'http://localhost:3000/api' // development api
-        : 'http://localhost:3000/api', // production api
+        : '/api', // production api
   },
   images: {
     domains: [
