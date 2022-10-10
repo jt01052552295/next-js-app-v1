@@ -12,7 +12,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     apiUrl:
       process.env.NEXT_PUBLIC_NODE_ENV === 'development'
-        ? 'http://localhost:3000/api' // development api
+        ? 'https://next-js-app-v1-ojqu.vercel.app/api' // development api
         : 'https://next-js-app-v1-ojqu.vercel.app/api', // production api
   },
   images: {
