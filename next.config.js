@@ -13,7 +13,7 @@ const nextConfig = {
     apiUrl:
       process.env.NEXT_PUBLIC_NODE_ENV === 'development'
         ? 'http://localhost:3000/api' // development api
-        : 'https://next-js-app-v1-ojqu-rbc81np6b-jt01052552295.vercel.app/api', // production api
+        : 'https://next-js-app-v1-ojqu.vercel.app/api', // production api
   },
   images: {
     domains: [
