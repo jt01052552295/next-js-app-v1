@@ -3,6 +3,8 @@ import Router from 'next/router';
 import { BehaviorSubject } from 'rxjs';
 import { fetchWrapper } from '../helpers';
 
+import { signUpService } from './sign.up.service';
+
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
 
@@ -35,6 +37,8 @@ function login(email, password) {
 
 function logout() {
   // remove user from local storage, publish null to user subscribers and redirect to login page
+  // console.log(signInService.userValue, signUpService.userValue);
+
   localStorage.removeItem('user');
   userSubject.next(null);
   Router.push('/');

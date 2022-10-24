@@ -10,7 +10,7 @@ import {
 } from '../../libraries';
 import SiteNavigation from '../molecules/SiteNavigation';
 
-import { signInService } from '../../services';
+import { signInService, signUpService } from '../../services';
 
 export default function SiteHeader({ ...props }) {
   const router = useRouter();
@@ -30,9 +30,12 @@ export default function SiteHeader({ ...props }) {
     router.events.on('routeChangeComplete', authCheck);
 
     // console.log('header - authorized', authorized);
-    // if (signInService.userValue) {
-    //   console.log('header - signInService.userValue', signInService.userValue);
-    // }
+    if (signInService.userValue) {
+      console.log('header - signInService.userValue', signInService.userValue);
+    }
+    if (signUpService.userValue) {
+      console.log('header - signUpService.userValue', signUpService.userValue);
+    }
 
     return () => {
       router.events.off('routeChangeStart', hideContent);
@@ -43,18 +46,21 @@ export default function SiteHeader({ ...props }) {
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
 
-    const publicPaths = ['/member/sign-in'];
+    const publicPaths = ['/member/sign-in', '/member/sign-up'];
     const path = url.split('?')[0];
-    if (!signInService.userValue && !publicPaths.includes(path)) {
-      // console.log('1111');
+
+    // console.log(JSON.parse(localStorage.getItem('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
+    // console.log(user);
+
+    if ((signInService.userValue || user) && !publicPaths.includes(path)) {
+      setAuthorized(true);
+    } else {
       setAuthorized(false);
       // router.push({
       //   pathname: '/member/sign-in',
       //   query: { returnUrl: router.asPath },
       // });
-    } else {
-      // console.log('2222');
-      setAuthorized(true);
     }
   }
 
@@ -76,9 +82,11 @@ export default function SiteHeader({ ...props }) {
 
         <div className="col-md-3 text-end">
           {authorized && (
-            <a href="#" onClick={logout}>
-              <a className="btn btn-outline-primary me-2">Logout</a>
-            </a>
+            <Link href="#">
+              <a onClick={logout}>
+                <a className="btn btn-outline-primary me-2">Logout</a>
+              </a>
+            </Link>
           )}
 
           {!authorized && (

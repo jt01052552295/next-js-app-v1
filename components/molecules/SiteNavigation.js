@@ -11,11 +11,6 @@ export default function SiteNavigation({ ...props }) {
           Home
         </NavigationLink>
       </li>
-      <li>
-        <NavigationLink href="/features" exact className="nav-link px-2 ">
-          Features
-        </NavigationLink>
-      </li>
 
       <li>
         <NavigationLink href="/board/basic" exact className="nav-link px-2 ">
@@ -29,9 +24,14 @@ export default function SiteNavigation({ ...props }) {
       </li>
       <li>
         <NavigationLink href="/pricing" exact className="nav-link px-2 ">
-          Pricing
+          Shop
         </NavigationLink>
       </li>
+      {/* <li>
+        <NavigationLink href="/features" exact className="nav-link px-2 ">
+          Features
+        </NavigationLink>
+      </li> */}
       <li>
         <NavigationLink href="/about" exact className="nav-link px-2 ">
           About

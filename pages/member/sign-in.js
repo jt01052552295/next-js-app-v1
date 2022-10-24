@@ -10,11 +10,12 @@ import {
 } from '../../libraries';
 import { faSearch, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { signInService } from '../../services';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkMeOut, setCheckMeOut] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [checkMeOut, setCheckMeOut] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordButtonIcon, setPasswordButtonIcon] = useState(faEyeSlash);
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function SignIn() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit222 = async (e) => {
     e.preventDefault();
     try {
       const credentials = { email, password };
@@ -88,66 +89,141 @@ export default function SignIn() {
         showFooter={true}
       >
         <div style={mainDivStyle}>
-          <form style={formStyle} onSubmit={(e) => handleSubmit(e)}>
-            <div className="form-group mb-3">
-              <Link href="/">
-                <a className="d-flex align-items-center justify-content-center ">
-                  <Image src="/vercel.svg" alt="Logo" width={283} height={64} />
-                </a>
-              </Link>
-            </div>
-            <div className="form-group mb-3">
-              <label htmlFor="inputEmail3">Email</label>
-              <input
-                type="text"
-                className="form-control"
-                name="username"
-                id="inputEmail3"
-                aria-describedby="emailHelp"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <div id="emailHelp" className="form-text">
-                We{`'`}ll never share your email with anyone else.
-              </div>
-            </div>
-            <div className="form-group mb-3">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <div className="input-group ">
-                <input
-                  type={passwordShown ? 'text' : 'password'}
-                  name="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
-                  onClick={togglePassword}
-                >
-                  <FontAwesomeIcon icon={passwordButtonIcon} />
+          <Formik
+            initialValues={{
+              email: 'test@test.com',
+              password: '1111',
+              checkMeOut: false,
+            }}
+            validate={(values) => {
+              const errors = {};
+              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = '이메일주소 형식에 맞게 입력해주세요.';
+              } else if (!values.password) {
+                errors.password = '비밀번호는 필수 입력항목입니다.';
+              }
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(true);
+              console.log(values);
+              const { email, password, checkMeOut } = { ...values };
+
+              try {
+                signInService
+                  .login(email, password)
+                  .then((res) => {
+                    // console.log('res', res);
+                    if (res.success) {
+                      const returnUrl = router.query.returnUrl || '/';
+                      router.push(returnUrl);
+                    } else {
+                      throw res.message;
+                    }
+                  })
+                  .catch((error) => {
+                    // setError("apiError", { message: error });
+                    console.error('signInService - catch', error);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form style={formStyle} onSubmit={(e) => handleSubmit(e)}>
+                <div className="form-group mb-3">
+                  <Link href="/">
+                    <a className="d-flex align-items-center justify-content-center ">
+                      <Image src="/vercel.svg" alt="Logo" width={283} height={64} />
+                    </a>
+                  </Link>
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="inputEmail3">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    id="inputEmail3"
+                    aria-describedby="emailHelp"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  <div id="emailHelp" className="form-text">
+                    <p className="text-danger mt-2">
+                      {errors.email && touched.email && errors.email}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="exampleInputPassword1">Password</label>
+                  <div className="input-group ">
+                    <input
+                      type={passwordShown ? 'text' : 'password'}
+                      name="password"
+                      className="form-control"
+                      id="exampleInputPassword1"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={togglePassword}
+                    >
+                      <FontAwesomeIcon icon={passwordButtonIcon} />
+                    </button>
+                  </div>
+                  <div id="passwordHelp" className="form-text">
+                    <p className="text-danger mt-2">
+                      {errors.password && touched.password && errors.password}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-group form-check mb-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    name="checkMeOut"
+                    id="exampleCheck1"
+                    checked={values.checkMeOut}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  <label className="form-check-label" htmlFor="exampleCheck1">
+                    Check me out
+                  </label>
+                </div>
+                <div className="form-text">
+                  <p className="text-danger mt-2">
+                    {errors.checkMeOut && touched.checkMeOut && errors.checkMeOut}
+                  </p>
+                </div>
+                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <div className="spinner-border spinner-border-sm" role="status">
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>Submit</>
+                  )}
                 </button>
-              </div>
-              <div id="passwordHelp" className="form-text">
-                Your password must be 8-20 characters long, contain letters and numbers, and must
-                not contain spaces, special characters, or emoji.
-              </div>
-            </div>
-            <div className="form-group form-check mb-3">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-                onChange={(e) => setCheckMeOut(!checkMeOut)}
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
-              </label>
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
+              </form>
+            )}
+          </Formik>
         </div>
       </AppLayout>
     </div>
