@@ -1,5 +1,6 @@
-import { React, PropTypes, Link } from '../../libraries';
+import { React, PropTypes, Link, FontAwesomeIcon } from '../../libraries';
 import NavigationLink from '../atoms/NavigationLink';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default function SiteNavigation({ ...props }) {
   //   console.log(Link);
@@ -23,18 +24,8 @@ export default function SiteNavigation({ ...props }) {
         </NavigationLink>
       </li>
       <li>
-        <NavigationLink href="/pricing" exact className="nav-link px-2 ">
-          Shop
-        </NavigationLink>
-      </li>
-      {/* <li>
-        <NavigationLink href="/features" exact className="nav-link px-2 ">
-          Features
-        </NavigationLink>
-      </li> */}
-      <li>
-        <NavigationLink href="/about" exact className="nav-link px-2 ">
-          About
+        <NavigationLink href="/map" exact className="nav-link px-2 ">
+          <FontAwesomeIcon icon={faLocationDot} /> 주소설정
         </NavigationLink>
       </li>
     </ul>
