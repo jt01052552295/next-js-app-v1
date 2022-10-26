@@ -19,7 +19,7 @@ import DetailAddress from '../components/atoms/DetailAddress';
 export default function Map() {
   const [data, setData] = useState({});
 
-  const [keyword, setKeyword] = useState('동래구 금강로');
+  const [keyword, setKeyword] = useState('');
 
   const [is_end, setIsEnd] = useState(false);
   const [pageable_count, setPageableCount] = useState(0);
@@ -42,6 +42,7 @@ export default function Map() {
   const searchAddr = (keyword, page) => {
     setShowDetail(false);
     setKeyword(keyword);
+
     const credentials = { keyword: keyword, page: page };
     try {
       mapService
@@ -96,16 +97,7 @@ export default function Map() {
             searchAddr(credentials.keyword, credentials.page);
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div className="w-100 form-group mb-3">

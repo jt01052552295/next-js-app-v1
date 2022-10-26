@@ -17,11 +17,29 @@ export default function SearchAddressRow({ item, setShowDetail }) {
   const setlocaladdr = (item) => {
     //console.log(item);
 
-    localStorage.setItem('address', item.road_address.address_name);
-    localStorage.setItem('road_name_temp', item.road_address.road_name);
-    localStorage.setItem('region_1depth_name', item.road_address.region_1depth_name);
-    localStorage.setItem('region_2depth_name', item.road_address.region_2depth_name);
-    localStorage.setItem('region_3depth_name', item.road_address.region_3depth_name);
+    let address_name = item.road_address?.address_name
+      ? item.road_address?.address_name
+      : item.address?.address_name;
+
+    let road_name_temp = item.road_address?.road_name
+      ? item.road_address?.road_name
+      : item.address?.address_name;
+
+    let region_1depth_name = item.road_address?.region_1depth_name
+      ? item.road_address?.region_1depth_name
+      : item.address?.region_1depth_name;
+    let region_2depth_name = item.road_address?.region_2depth_name
+      ? item.road_address?.region_2depth_name
+      : item.address?.region_2depth_name;
+    let region_3depth_name = item.road_address?.region_3depth_name
+      ? item.road_address?.region_3depth_name
+      : item.address?.region_3depth_h_name;
+
+    localStorage.setItem('address', address_name);
+    localStorage.setItem('road_name_temp', road_name_temp);
+    localStorage.setItem('region_1depth_name', region_1depth_name);
+    localStorage.setItem('region_2depth_name', region_2depth_name);
+    localStorage.setItem('region_3depth_name', region_3depth_name);
     setShowDetail(true);
   };
 
