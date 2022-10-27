@@ -18,7 +18,7 @@ import Products from '../components/atoms/Products';
 import ProductsEtc from '../components/atoms/ProductsEtc';
 
 export default function Shop({ page, list, fallback }) {
-  const [products, setProductsState] = useRecoilState(productState);
+  const [products, setProductsState] = useState([]);
 
   const category1 = useRecoilValue(category1State);
   const category2 = useRecoilValue(category2State);
