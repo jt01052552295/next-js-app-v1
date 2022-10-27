@@ -57,9 +57,7 @@ export default function Shop({ page, list, fallback }) {
       >
         <div className="d-flex justify-content-center">
           <div className="w-100 text-center">
-            <h1 className="h1">
-              메뉴 <small>작업중</small>
-            </h1>
+            <h1 className="h1">메뉴</h1>
 
             <ul className="nav nav-pills nav-fill mb-5">
               {Object.keys(category1).map((x) => {
