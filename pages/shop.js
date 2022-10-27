@@ -63,6 +63,7 @@ export default function Shop({ page, list, fallback }) {
             <ul className="nav nav-pills nav-fill mb-5">
               {Object.keys(category1).map((x) => {
                 let arr = Object.entries(category1[x]);
+                console.log(arr);
                 return (
                   <li
                     className={`nav-item ${arr[0][0] === '02' ? 'dropdown' : ''}`}
@@ -85,6 +86,7 @@ export default function Shop({ page, list, fallback }) {
                       <ul className="dropdown-menu">
                         {Object.values(category2).map((row) => {
                           let arr = Object.entries(row);
+                          console.log(arr);
                           return (
                             <li key={arr[0][0]}>
                               <a
