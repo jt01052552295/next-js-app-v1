@@ -58,7 +58,7 @@ export default function ProductsEtc({ category, products }) {
                 <div className="card-body">
                   <Link href={`#`}>
                     <a className="d-block text-reset text-decoration-none">
-                      <h6 className="h6 ">{article.name}</h6>
+                      <p className="h6 ">{article.name}</p>
                     </a>
                   </Link>
                 </div>
