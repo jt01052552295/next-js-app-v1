@@ -33,9 +33,10 @@ export default function Shop({ page, list, fallback }) {
   };
 
   useEffect(() => {
-    if (products.length === 0 && list.body?.length > 0) {
-      setProductsState(list.body);
-    }
+    // if (products.length === 0 && list.body?.length > 0) {
+    //   setProductsState(list.body);
+    // }
+    setProductsState(list.body);
     console.log(list.body);
 
     // Object.values(category2).map((row) => {
