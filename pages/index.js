@@ -1,5 +1,5 @@
-import { useEffect, useRecoilState, useRecoilValue } from '../libraries';
-import { newsState, usersState } from '../atoms';
+import { useEffect, useRecoilState, useRecoilValue, Image } from '../libraries';
+import { newsState, usersState, productState } from '../atoms';
 
 import Head from 'next/head';
 import AppLayout from '../components/templates/AppLayout';
@@ -17,7 +17,6 @@ export default function Home({ newsResults, randomUsersResults }) {
       setNewsState(newsResults.articles);
     }
 
-    // console.log(newsResults.articles);
     // console.log(randomUsersResults.results);
   }, []);
 
@@ -43,7 +42,16 @@ export default function Home({ newsResults, randomUsersResults }) {
         {[...Array(100)].map((x, i) => (
           <p key={i}>test {i}</p>
         ))}
-        <div>test11</div>
+        <div>
+          test11{' '}
+          <Image
+            src="http://gifpng.com/300x200"
+            width="200"
+            height="200"
+            className=" card-img-top  "
+            alt="card-image"
+          />
+        </div>
         <div>test22</div>
       </AppLayout>
     </div>

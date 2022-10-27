@@ -43,6 +43,11 @@ export default function SiteNavigation({ ...props }) {
         </NavigationLink>
       </li>
       <li>
+        <NavigationLink href="/shop" exact className="nav-link px-2 ">
+          Shop
+        </NavigationLink>
+      </li>
+      <li>
         <NavigationLink href="/map" exact className="nav-link px-2 ">
           <FontAwesomeIcon icon={faLocationDot} /> {roadName ? roadName : '주소설정'}
         </NavigationLink>

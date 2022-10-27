@@ -44,3 +44,23 @@ export const addressState = atom({
   key: 'addressState', // unique ID (with respect to other atoms/selectors)
   default: '', // default value (aka initial value)
 });
+
+export const productState = atom({
+  key: 'productState', // unique ID (with respect to other atoms/selectors)
+  default: [], // default value (aka initial value)
+});
+
+export const category1State = atom({
+  key: 'category1State', // unique ID (with respect to other atoms/selectors)
+  default: [{ '02': '피자' }, { '03': '파스타&치킨' }, { '04': '사이드&음료' }], // default value (aka initial value)
+});
+
+export const category2State = atom({
+  key: 'category2State', // unique ID (with respect to other atoms/selectors)
+  default: [
+    { '0202': '프리미엄' },
+    { '0203': '마니아' },
+    { '0204': '팬' },
+    { '0205': '(씬)메가크런치' },
+  ], // default value (aka initial value)
+});
