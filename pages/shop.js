@@ -110,7 +110,8 @@ export default function Shop({ page, list, fallback }) {
               return (
                 activeTab === arr[0][0] && (
                   <div className="w-100" key={arr[0][0]}>
-                    <Products category={arr[0][0]} products={products} />
+                    Products
+                    {/* <Products category={arr[0][0]} products={products} /> */}
                   </div>
                 )
               );
@@ -121,7 +122,8 @@ export default function Shop({ page, list, fallback }) {
               return (
                 activeTab === arr[0][0] && (
                   <div className="w-100" key={arr[0][0]}>
-                    <ProductsEtc category={arr[0][0]} products={products} />
+                    ProductsEtc
+                    {/* <ProductsEtc category={arr[0][0]} products={products} /> */}
                   </div>
                 )
               );
