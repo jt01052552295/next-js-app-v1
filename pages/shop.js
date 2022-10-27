@@ -33,15 +33,19 @@ export default function Shop({ page, list, fallback }) {
   };
 
   useEffect(() => {
-    // if (products.length === 0 && list.body?.length > 0) {
-    //   setProductsState(list.body);
-    // }
-    setProductsState(list.body);
-    console.log(list.body);
+    if (products.length === 0 && list.body?.length > 0) {
+      setProductsState(list.body);
+    }
+    // setProductsState(list.body);
+    // console.log(list.body);
 
-    // Object.values(category2).map((row) => {
-    //   let arr = Object.entries(row);
-    //   console.log(arr[0][0], arr[0][1]);
+    // category1.map((row) => {
+    //   let [code, name] = row;
+    //   console.log(code, name);
+    // });
+    // category2.map((row) => {
+    //   let [code, name] = row;
+    //   console.log(code, name);
     // });
   }, []);
 
@@ -61,40 +65,37 @@ export default function Shop({ page, list, fallback }) {
             <h1 className="h1">메뉴</h1>
 
             <ul className="nav nav-pills nav-fill mb-5">
-              {Object.keys(category1).map((x) => {
-                let arr = Object.entries(category1[x]);
-                console.log(arr);
+              {category1.map((row) => {
+                let [code, name] = row;
+                // console.log(arr);
                 return (
-                  <li
-                    className={`nav-item ${arr[0][0] === '02' ? 'dropdown' : ''}`}
-                    key={arr[0][0]}
-                  >
+                  <li className={`nav-item ${code === '02' ? 'dropdown' : ''}`} key={code}>
                     <a
-                      className={`nav-link ${arr[0][0] === '02' ? 'dropdown-toggle' : ''} ${
-                        activeTab.substr(0, 2) === arr[0][0] ? 'active' : ''
+                      className={`nav-link ${code === '02' ? 'dropdown-toggle' : ''} ${
+                        activeTab.substr(0, 2) === code ? 'active' : ''
                       }`}
                       href="#"
-                      role={`${arr[0][0] === '02' ? 'button' : ''}`}
+                      role={`${code === '02' ? 'button' : ''}`}
                       aria-expanded="false"
-                      data-bs-toggle={`${arr[0][0] === '02' ? 'dropdown' : ''}`}
-                      onClick={(e) => tabClickHandler(arr[0][0])}
+                      data-bs-toggle={`${code === '02' ? 'dropdown' : ''}`}
+                      onClick={(e) => tabClickHandler(code)}
                     >
-                      {arr[0][1]}
+                      {name}
                     </a>
 
-                    {arr[0][0] === '02' && (
+                    {code === '02' && (
                       <ul className="dropdown-menu">
-                        {Object.values(category2).map((row) => {
-                          let arr = Object.entries(row);
-                          console.log(arr);
+                        {category2.map((row) => {
+                          let [code, name] = row;
+                          //   console.log(arr);
                           return (
-                            <li key={arr[0][0]}>
+                            <li key={code}>
                               <a
                                 className="dropdown-item"
                                 href="#"
-                                onClick={(e) => tabClickHandler(arr[0][0])}
+                                onClick={(e) => tabClickHandler(code)}
                               >
-                                {arr[0][1]}
+                                {name}
                               </a>
                             </li>
                           );
@@ -106,25 +107,23 @@ export default function Shop({ page, list, fallback }) {
               })}
             </ul>
 
-            {Object.values(category2).map((row) => {
-              let arr = Object.entries(row);
+            {category2.map((row) => {
+              let [code, name] = row;
               return (
-                activeTab === arr[0][0] && (
-                  <div className="w-100" key={arr[0][0]}>
-                    Products
-                    {/* <Products category={arr[0][0]} products={products} /> */}
+                activeTab === code && (
+                  <div className="w-100" key={code}>
+                    <Products category={code} products={products} />
                   </div>
                 )
               );
             })}
 
-            {Object.values(category1).map((row) => {
-              let arr = Object.entries(row);
+            {category1.map((row) => {
+              let [code, name] = row;
               return (
-                activeTab === arr[0][0] && (
-                  <div className="w-100" key={arr[0][0]}>
-                    ProductsEtc
-                    {/* <ProductsEtc category={arr[0][0]} products={products} /> */}
+                activeTab === code && (
+                  <div className="w-100" key={code}>
+                    <ProductsEtc category={code} products={products} />
                   </div>
                 )
               );
