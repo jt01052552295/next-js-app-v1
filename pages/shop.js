@@ -23,11 +23,10 @@ export default function Shop({ page, list, fallback }) {
   const category1 = useRecoilValue(category1State);
   const category2 = useRecoilValue(category2State);
 
-  const [activeIndex, setActiveIndex] = useState('02');
   const [activeTab, setActiveTab] = useState('0202');
 
   const tabClickHandler = (index) => {
-    console.log(index);
+    //console.log(index);
     if (index !== '02') {
       setActiveTab(index);
     }
@@ -37,7 +36,7 @@ export default function Shop({ page, list, fallback }) {
     if (products.length === 0 && list.body?.length > 0) {
       setProductsState(list.body);
     }
-    // console.log(category2);
+    console.log(list.body);
 
     // Object.values(category2).map((row) => {
     //   let arr = Object.entries(row);
