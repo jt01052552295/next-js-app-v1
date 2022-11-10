@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppLayout from '../components/templates/AppLayout';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -7,6 +7,10 @@ export default function Example() {
   const { isLoading, error, data, isFetching } = useQuery(['repoData'], () =>
     axios.get('https://api.github.com/repos/tannerlinsley/react-query').then((res) => res.data),
   );
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   if (isLoading) return 'Loading...';
 

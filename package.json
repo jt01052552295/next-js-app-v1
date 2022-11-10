@@ -27,6 +27,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-js-pagination": "^3.0.3",
     "recoil": "^0.7.5",
+    "recoil-persist": "^4.2.0",
     "rxjs": "^7.5.6"
   },
   "devDependencies": {
